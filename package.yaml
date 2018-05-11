@@ -1,0 +1,55 @@
+name: tmplbot
+version: 0.1.0
+github: "demmys/tmplbot"
+license: BSD3
+author: "Atsuki Demizu"
+maintainer: "demmys.atsuki@gmail.com"
+copyright: "2018 Atsuki Demizu"
+
+extra-source-files:
+- README.md
+
+description: Please see the README on GitHub at <https://github.com/demmys/tmplbot#readme>
+
+dependencies:
+- base
+- marvin
+- monad-logger
+
+default-extensions:
+- OverloadedStrings
+- MultiParamTypeClasses
+- TemplateHaskell
+
+library:
+  source-dirs: lib
+  exposed-modules:
+  - Logger
+  dependencies:
+  - marvin-interpolate
+  - text
+  - time
+
+executables:
+  tmplbot-exe:
+    main: Main.hs
+    source-dirs: app
+    dependencies:
+    - tmplbot
+    - text
+    - aeson
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+
+tests:
+  tmplbot-test:
+    main: Spec.hs
+    source-dirs: test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - tmplbot
